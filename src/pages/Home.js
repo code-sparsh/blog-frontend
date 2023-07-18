@@ -11,7 +11,7 @@ const Home = () => {
 
         const fetchBlogs = async () => {
 
-            const response = await fetch("http://localhost:8080/api/blog", {
+            const response = await fetch("https://blogpoint-backend.up.railway.app/api/blog", {
                 method: "GET",
             })
 

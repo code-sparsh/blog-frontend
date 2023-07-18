@@ -48,7 +48,7 @@ export default function Signup() {
     const email = formdata.get('email');
     const password = formdata.get('password');
 
-    const response = await fetch('http://localhost:8080/api/user/signup' , {
+    const response = await fetch('https://blogpoint-backend.up.railway.app/api/user/signup' , {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

@@ -13,7 +13,7 @@ const BlogPost = () => {
 
         const fetchBlog = async () => {
 
-            const response = await fetch("http://localhost:8080/api/blog/" + id, {
+            const response = await fetch("https://blogpoint-backend.up.railway.app/api/blog/" + id, {
                 method: "GET",
             })
 
