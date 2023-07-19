@@ -22,7 +22,7 @@ const BlogForm = () => {
         console.log('Title:', title);
         console.log('Content:', content);
 
-        const response = await fetch("https://blogpoint-backend.up.railway.app/api/blog/create", {
+        const response = await fetch(process.env.REACT_APP_BACKEND_URL + + "/api/blog/create", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

@@ -2,9 +2,6 @@ import { Link } from "react-router-dom";
 
 const BlogComponent = ({ blog: blog }) => {
 
-    console.log("good")
-    console.log(blog);
-
     let shortData = "";
 
     if (blog.data) {
@@ -20,7 +17,7 @@ const BlogComponent = ({ blog: blog }) => {
                     <div className="author text-right font-semibold hover:underline">By - {blog.author}</div>
                 </div>
 
-                <div className="data">{shortData}</div>
+                <div className="mt-4 break-words">{shortData}</div>
             </div>
         </div>
     )

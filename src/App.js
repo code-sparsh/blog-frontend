@@ -10,11 +10,11 @@ import './App.css';
 import useAuthContext from './hooks/useAuthContext';
 import BlogForm from './pages/BlogForm';
 import BlogPost from './pages/BlogPost';
+import ScrollToTop from './components/scrollToTop';
 
 
 
 const App = () => {
-
   const { user } = useAuthContext();
   return (
 
@@ -23,7 +23,7 @@ const App = () => {
       <div className='h-screen'>
         <Navbar />
         <div className="pages">
-
+          <ScrollToTop/>
           <Routes>
 
             <Route

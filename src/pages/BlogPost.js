@@ -13,7 +13,7 @@ const BlogPost = () => {
 
         const fetchBlog = async () => {
 
-            const response = await fetch("https://blogpoint-backend.up.railway.app/api/blog/" + id, {
+            const response = await fetch(process.env.REACT_APP_BACKEND_URL + "/api/blog/" + id, {
                 method: "GET",
             })
 
@@ -31,12 +31,11 @@ const BlogPost = () => {
     }, [])
 
     return (
-        <div className="bg-graye-100 h-screen flex justify-center">
-            <div className="h-full w-2/4 bg-graye-100 border shadow-md">
-                <div className="font-bold text-5xl p-8">{blog.title}</div>
-                <div className="p-12 text-lg">{blog.data}</div>
-            </div>
-            
+        <div className="md:bg-gray-100 h-full flex justify-center break-words">
+            <div className="lg:w-2/4 bg-gray-100 md:bg-white border shadow-md">
+                <div className="font-bold text-3xl md:text-5xl p-8">{blog.title}</div>
+                <div className="p-6 md:p-12 text-lg]">{blog.data}</div>
+            </div>  
         </div>
     )
 
