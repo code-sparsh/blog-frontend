@@ -20,7 +20,7 @@ const App = () => {
 
     <BrowserRouter>
 
-      <div className='h-screen'>
+      <div className='h-full'>
         <Navbar />
         <div className="pages h-full">
           <ScrollToTop/>
