@@ -22,7 +22,8 @@ const Home = () => {
                 return;
             }
 
-            setBlogs(data);
+            if(response.ok)
+                setBlogs(data);
             
         }
 

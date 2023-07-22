@@ -33,7 +33,7 @@ const Navbar = () => {
             <div className="container flex flex-wrap items-center justify-between mx-auto">
                 <Link to="/" className="flex items-center">
 
-                    <img src={blogIcon} className=" h-11 mr-3" alt="Flowbite Logo" />
+                    <img src={blogIcon} className=" h-11 mr-3"/>
                     <span className="self-center text-2xl m-2 font-semibold whitespace-nowrap light:text-white">BlogPoint</span>
                 </Link>
                 <div className="flex items-center md:order-2">

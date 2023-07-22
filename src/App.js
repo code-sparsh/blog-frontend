@@ -18,11 +18,11 @@ const App = () => {
   const { user } = useAuthContext();
   return (
 
-    <BrowserRouter className="h-screen">
+    <BrowserRouter>
 
       <div className='h-screen'>
         <Navbar />
-        <div className="pages">
+        <div className="pages h-full">
           <ScrollToTop/>
           <Routes>
 

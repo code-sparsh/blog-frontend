@@ -45,11 +45,11 @@ const BlogForm = () => {
 
     return (
         <div className="bg-yellow-100 min-h-screen flex justify-center">
-            <div className="bg-yellow-50 shadow-lg rounded-lg p-8 w-3/4 mt-20 h-3/4">
+            <div className="bg-yellow-50 shadow-lg rounded-lg p-8 w-4/5 md:w-3/4 mt-20 h-3/4">
                 <div className="flex justify-between">
                     <h1 className="text-3xl mb-4">Create a New Blog Post</h1>
-                    <button onClick={handleSubmit}
-                        className="bg-yellow-700 hover:bg-yellow-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    <button onClick={handleSubmit} 
+                    className="bg-yellow-700 hover:bg-yellow-900 text-white font-bold py-2 px-4 rounded">
                         Post
                     </button>
                 </div>

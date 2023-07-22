@@ -31,10 +31,10 @@ const BlogPost = () => {
     }, [])
 
     return (
-        <div className="md:bg-gray-100 h-full flex justify-center break-words">
-            <div className="lg:w-2/4 bg-gray-100 md:bg-white border shadow-md">
+        <div className="md:bg-gray-100 h-full flex justify-center break-words whitespace-pre-line">
+            <div className="lg:w-2/4 bg-gray-100 md:bg-white border shadow-md h-full">
                 <div className="font-bold text-3xl md:text-5xl p-8">{blog.title}</div>
-                <div className="p-6 md:p-12 text-lg]">{blog.data}</div>
+                <div className="p-6 md:p-12 text-lg overflow-wrap">{blog.data}</div>
             </div>  
         </div>
     )
