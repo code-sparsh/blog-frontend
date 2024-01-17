@@ -35,20 +35,18 @@ const theme = createTheme();
 export default function Signup() {
 
   const {dispatch} = useAuthContext()
+  const [error, setError] = React.useState(null)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setError(null);
     const formdata = new FormData(event.currentTarget);
-    console.log({
-      email: formdata.get('email'),
-      password: formdata.get('password'),
-    });
 
     const name = formdata.get('firstName') + " " + formdata.get('lastName');
     const email = formdata.get('email');
     const password = formdata.get('password');
 
-    const response = await fetch(process.env.REACT_APP_BACKEND_URL + "/api/user/signup" , {
+    const response = await fetch(process.env.REACT_APP_BACKEND_URL + "/api/auth/register" , {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -60,6 +58,14 @@ export default function Signup() {
 
     if(!response.ok) {
       console.log(data.error);
+      
+      if(response.status == 409) {
+        setError("User already exists with this email ID")
+      }
+
+      else {
+        setError("Server is currently down. Please try again later")
+      }
     }
 
     if(response.ok) {
@@ -150,6 +156,7 @@ export default function Signup() {
               </Grid>
             </Grid>
           </Box>
+          {error?<div className=' px-2 mt-4 text-red-500 text-center border border-x-pink-600 rounded-lg'>{error}</div>:null}
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>

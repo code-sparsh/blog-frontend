@@ -1,11 +1,19 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import BlogComponent from '../components/BlogComponent';
+import useSessionExpired from '../hooks/useSessionExpired.js';
+
+
+import { ThreeDots } from 'react-loader-spinner'
 
 
 const Home = () => {
 
-    const [blogs, setBlogs] = useState([]);
+    const [blogs, setBlogs] = useState(null);
+    const { sessionExpired } = useSessionExpired();
+
+
+    const token = JSON.parse(localStorage.getItem("user")).token
 
     useEffect(() => {
 
@@ -13,20 +21,22 @@ const Home = () => {
 
             const response = await fetch(process.env.REACT_APP_BACKEND_URL + "/api/blog", {
                 method: "GET",
+                headers: {
+                    "Authorization": "Bearer " + token
+                }
             })
 
             const data = await response.json();
 
             if (!response.ok) {
                 console.log(data.error);
+                if (response.status == 401) {
+                    sessionExpired();
+                }
                 return;
             }
-
-            if(response.ok)
-                setBlogs(data);
-            
+            setBlogs(data);
         }
-
         fetchBlogs();
     }, [])
 
@@ -46,9 +56,17 @@ const Home = () => {
                     })
 
                 }
-                {/* {blogs?
-            <BlogComponent blog = {blogs[0]} />: null
-            } */}
+                {!blogs ? <div className='grid place-items-center mt-10'><ThreeDots
+                    visible={true}
+                    height="80"
+                    width="80"
+                    color="#4fa94d"
+                    radius="9"
+                    ariaLabel="three-dots-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                /> </div>: null}
+
             </div>
         </div>
     )

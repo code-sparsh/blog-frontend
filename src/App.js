@@ -28,7 +28,7 @@ const App = () => {
 
             <Route
               path="/"
-              element={<Home />}
+              element={user ? <Home /> : <Navigate to="/login" />}
             />
 
             <Route

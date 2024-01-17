@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import useAuthContext from '../hooks/useAuthContext';
+import useSessionExpired from '../hooks/useSessionExpired.js';
 
 const BlogForm = () => {
 
@@ -7,6 +8,10 @@ const BlogForm = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [author, setAuthor] = useState(user.name);
+
+    const { sessionExpired } = useSessionExpired();
+    const token = JSON.parse(localStorage.getItem("user")).token
+
 
 
     const handleTitleChange = (e) => {
@@ -22,10 +27,11 @@ const BlogForm = () => {
         console.log('Title:', title);
         console.log('Content:', content);
 
-        const response = await fetch(process.env.REACT_APP_BACKEND_URL + + "/api/blog/create", {
+        const response = await fetch(process.env.REACT_APP_BACKEND_URL + "/api/blog/create", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
             },
             body: JSON.stringify({title, data: content, author})
         })
@@ -37,6 +43,9 @@ const BlogForm = () => {
         }
         if(!response.ok) {
             console.log(data);
+            if (response.status == 401) {
+                sessionExpired();
+            }
         }
         // Clear the form fields after submitting
         setTitle('');

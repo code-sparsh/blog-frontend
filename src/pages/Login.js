@@ -28,14 +28,20 @@ function Copyright(props) {
   );
 }
 
+
+
 const theme = createTheme();
 
 export default function Login() {
 
   const {dispatch} = useAuthContext();
+  
+  const [error, setError] = React.useState(null)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setError(null);
+    
     const formdata = new FormData(event.currentTarget);
 
     const email = formdata.get('email');
@@ -43,7 +49,7 @@ export default function Login() {
 
     // console.log(email,password);
 
-    const response = await fetch(process.env.REACT_APP_BACKEND_URL + '/api/user/login', {
+    const response = await fetch(process.env.REACT_APP_BACKEND_URL + '/api/auth/login', {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -55,12 +61,23 @@ export default function Login() {
 
     if(response.ok) {
       dispatch({type: 'LOGIN', payload: data})
-      data.password = null;
       localStorage.setItem('user', JSON.stringify(data))
     }
 
     if(!response.ok) {
       console.log(data.error);
+      
+      if(response.status == 404) {
+        setError("Email not registered. Please register or try again with a different email")
+      }
+
+      else if(response.status == 401) {
+        setError("Incorrect password or email. Please try again")
+      }
+
+      else {
+        setError("Server is currently down. Please try again later")
+      }
     }
     
   };
@@ -129,7 +146,9 @@ export default function Login() {
               </Grid>
             </Grid>
           </Box>
+          {error?<div className=' px-2 mt-4 text-red-500 text-center border border-x-pink-600 rounded-lg'>{error}</div>:null}
         </Box>
+        
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
