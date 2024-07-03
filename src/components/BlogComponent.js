@@ -17,7 +17,7 @@ const BlogComponent = ({ blog: blog }) => {
             <div className="grid mt-4 lg:mt-0 lg:ml-4">
                 <div className="flex justify-between">
                     <Link to={"/blog/" + blog.id} className="title text-2xl font-bold hover:underline">{blog.title}</Link>
-                    <div className="author text-right font-semibold hover:underline">By - {blog.author}</div>
+                    <Link to={"/u/" + blog.author} className="author text-right font-semibold hover:underline">By - {blog.author}</Link>
                 </div>
                 <div className="mt-4 break-words">{shortData}</div>
             </div>

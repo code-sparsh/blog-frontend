@@ -9,6 +9,7 @@ const Navbar = () => {
     const {user} = useAuthContext()
     const {logout} = useLogout();
 
+
     const [isDropdownOpened, setIsDropdownOpened] = useState(false);
     const [isUserMenuOpened, setIsUserMenuOpened] = useState(false);
     
@@ -24,6 +25,12 @@ const Navbar = () => {
     const onClickHandle = () => {
         logout()
     }
+
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    let username = "";
+
+    if(storedUser)
+        username = JSON.parse(localStorage.getItem("user")).username
 
 
     let name,email;
@@ -61,10 +68,7 @@ const Navbar = () => {
                         </div>
                         <ul className="py-2" aria-labelledby="user-menu-button">
                             <li>
-                                <Link to="/profile/form" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 light:hover:bg-gray-600 light:text-gray-200 light:hover:text-white">Update Profile</Link>
-                            </li>
-                            <li>
-                                <Link to="/mylistings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 light:hover:bg-gray-600 light:text-gray-200 light:hover:text-white">My Blogs</Link>
+                                <Link to={"/u/" + username} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 light:hover:bg-gray-600 light:text-gray-200 light:hover:text-white">My Profile</Link>
                             </li>
                             <li>
                                 <Link to="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 light:hover:bg-gray-600 light:text-gray-200 light:hover:text-white">Settings</Link>
@@ -87,9 +91,7 @@ const Navbar = () => {
                         <li>
                             <Link to="/" className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 light:text-gray-400 md:light:hover:text-white light:hover:bg-gray-700 light:hover:text-white md:light:hover:bg-transparent light:border-gray-700">About</Link>
                         </li>
-                        <li>
-                            <Link to="/" className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 light:text-gray-400 md:light:hover:text-white light:hover:bg-gray-700 light:hover:text-white md:light:hover:bg-transparent light:border-gray-700" aria-current="page">Blogs</Link>
-                        </li>
+                        
                         {!user? <li>
                             <Link to="/login" className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 light:text-gray-400 md:light:hover:text-white light:hover:bg-gray-700 light:hover:text-white md:light:hover:bg-transparent light:border-gray-700">Login</Link>
                         </li> : null}

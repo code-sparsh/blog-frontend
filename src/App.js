@@ -10,6 +10,7 @@ import './App.css';
 import useAuthContext from './hooks/useAuthContext';
 import BlogForm from './pages/BlogForm';
 import BlogPost from './pages/BlogPost';
+import UserProfile from './pages/UserProfile';
 import ScrollToTop from './components/scrollToTop';
 
 
@@ -28,7 +29,8 @@ const App = () => {
 
             <Route
               path="/"
-              element={user ? <Home /> : <Navigate to="/login" />}
+              element={<Home/>}
+              // element={user ? <Home /> : <Navigate to="/login" />}
             />
 
             <Route
@@ -42,13 +44,18 @@ const App = () => {
             />
 
             <Route 
-              path="/blog/new"
+              path="/create-blog"
               element={user ? <BlogForm /> : <Navigate to="/login" />}
             />
 
             <Route
               path="/blog/:id"
               element={<BlogPost/>}
+            />
+
+            <Route
+              path="/u/:id"
+              element={<UserProfile/>}
             />
 
           </Routes>

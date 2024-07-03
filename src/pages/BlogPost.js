@@ -11,7 +11,7 @@ const BlogPost = () => {
     const id = params.id;
     const { sessionExpired } = useSessionExpired();
 
-    const token = JSON.parse(localStorage.getItem("user")).token
+    // const token = JSON.parse(localStorage.getItem("user")).token
 
     const [blog, setBlog] = useState(null);
 
@@ -19,11 +19,11 @@ const BlogPost = () => {
 
         const fetchBlog = async () => {
 
-            const response = await fetch(process.env.REACT_APP_BACKEND_URL + "/api/blog/" + id, {
+            const response = await fetch(process.env.REACT_APP_BACKEND_URL + "/api/public/blog/" + id, {
                 method: "GET",
-                headers: {
-                    "Authorization": "Bearer " + token
-                }
+                // headers: {
+                //     "Authorization": "Bearer " + token
+                // }
             })
 
             const data = await response.json();
