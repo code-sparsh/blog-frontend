@@ -14,6 +14,7 @@ const Home = () => {
 
 
     const token = JSON.parse(localStorage.getItem("user")).token
+    const username = JSON.parse(localStorage.getItem("user")).username
 
     useEffect(() => {
 
@@ -43,6 +44,8 @@ const Home = () => {
 
     return (
         <div className="bg-yellowe-100 h-screen">
+
+            <div className=' text-lg  lg:text-4xl  text-center font-sans py-4 bg-gray-100 '>Welcome, <span className="font-bold">{username}</span></div>
 
             <div className="px-12 pt-12 text-4xl text-center">Blogs</div>
 

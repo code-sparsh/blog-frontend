@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import useAuthContext from '../hooks/useAuthContext';
 import useSessionExpired from '../hooks/useSessionExpired.js';
-
 const BlogForm = () => {
 
     const {user} = useAuthContext();
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const [author, setAuthor] = useState(user.name);
+    const [image, setImage] = useState(null);
 
     const { sessionExpired } = useSessionExpired();
     const token = JSON.parse(localStorage.getItem("user")).token
@@ -22,18 +21,26 @@ const BlogForm = () => {
         setContent(e.target.value);
     };
 
+    const handleFileChange = (e) => {
+        setImage(e.target.files[0]);
+    }
+
     const handleSubmit =  async (e) => {
         e.preventDefault();
-        console.log('Title:', title);
-        console.log('Content:', content);
+        
+        const formData = new FormData();
+        // formData.append('blog', JSON.stringify({title, content}));
+        formData.append('image', image);
+        formData.append('title', title);
+        formData.append('data', content);
+        formData.append('hello', 'world');
 
         const response = await fetch(process.env.REACT_APP_BACKEND_URL + "/api/blog/create", {
             method: "POST",
+            body: formData,
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + token
+                "Authorization": "Bearer " + token,          
             },
-            body: JSON.stringify({title, data: content, author})
         })
 
         const data = await response.json();
@@ -50,6 +57,7 @@ const BlogForm = () => {
         // Clear the form fields after submitting
         setTitle('');
         setContent('');
+        setImage('')
     };
 
     return (
@@ -88,6 +96,13 @@ const BlogForm = () => {
                             value={content}
                             onChange={handleContentChange}
                         />
+                    </div>
+
+                    <div>
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="image">
+                            Cover Image
+                    </label>
+                        <input type="file" name="image" onChange={handleFileChange}/>
                     </div>
 
                 </form>

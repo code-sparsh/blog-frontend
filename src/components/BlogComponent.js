@@ -10,7 +10,10 @@ const BlogComponent = ({ blog: blog }) => {
     }
 
     return (
-        <div className=" bg-gray-100 p-10 border shadow-sm">
+        <div className=" bg-gray-100 p-10 border shadow-sm flex">
+            <div className="object-cover h-6 w-80">
+                <img src={blog.imageURL} alt="blog image" />
+            </div>
             <div className=" grid">
                 <div className="flex justify-between">
                     <Link to={"/blog/" + blog.id} className="title text-2xl font-bold hover:underline">{blog.title}</Link>
